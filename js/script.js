@@ -1,4 +1,3 @@
-
 // ==========================================
 // SIMTELE-WEB
 // Panel educativo de monitoreo
@@ -9,6 +8,108 @@
 
 let mantenimientos = [];
 let sensores = [];
+
+
+// ==========================================
+// GESTIÓN DE AUTENTICACIÓN Y USUARIOS
+// ==========================================
+
+let esModoRegistro = false;
+
+document.getElementById("cambiarModoRegistro").addEventListener("click", function(e) {
+    e.preventDefault();
+    esModoRegistro = !esModoRegistro;
+
+    let titulo = document.getElementById("tituloLogin");
+    let subtitulo = document.getElementById("subtituloLogin");
+    let btnAccion = document.getElementById("btnAccionLogin");
+    let textoCambio = document.getElementById("textoCambioModo");
+    let enlaceCambio = document.getElementById("cambiarModoRegistro");
+    let mensaje = document.getElementById("mensajeLogin");
+
+    mensaje.textContent = "";
+
+    if (esModoRegistro) {
+        titulo.textContent = "🚡 Registrarse";
+        subtitulo.textContent = "Crea una nueva cuenta";
+        btnAccion.textContent = "Registrarse";
+        textoCambio.textContent = "¿Ya tienes cuenta?";
+        enlaceCambio.textContent = "Inicia sesión aquí";
+    } else {
+        titulo.textContent = "🚡 SIMTELE-WEB";
+        subtitulo.textContent = "Iniciar sesión en el sistema";
+        btnAccion.textContent = "Iniciar sesión";
+        textoCambio.textContent = "¿No tienes cuenta?";
+        enlaceCambio.textContent = "Regístrate aquí";
+    }
+});
+
+document.getElementById("formLogin").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let usuarioInput = document.getElementById("usuario").value.trim();
+    let contrasenaInput = document.getElementById("contrasena").value.trim();
+    let mensaje = document.getElementById("mensajeLogin");
+
+    // Obtener usuarios guardados o crear un array vacío
+    let usuariosGuardados = JSON.parse(localStorage.getItem("simtele_usuarios")) || [];
+
+    if (esModoRegistro) {
+        // Lógica de Registro
+        let existe = usuariosGuardados.some(u => u.usuario === usuarioInput);
+        if (existe) {
+            mensaje.textContent = "Error: El usuario ya existe.";
+            mensaje.style.color = "red";
+            return;
+        }
+
+        usuariosGuardados.push({ usuario: usuarioInput, contrasena: contrasenaInput });
+        localStorage.setItem("simtele_usuarios", JSON.stringify(usuariosGuardados));
+
+        mensaje.textContent = "¡Registro exitoso! Ahora puedes iniciar sesión.";
+        mensaje.style.color = "green";
+        document.getElementById("formLogin").reset();
+        
+        // Cambiar automáticamente a modo login
+        document.getElementById("cambiarModoRegistro").click();
+    } else {
+        // Lógica de Inicio de Sesión
+        let usuarioValido = usuariosGuardados.find(u => u.usuario === usuarioInput && u.contrasena === contrasenaInput);
+
+        if (usuarioValido) {
+            localStorage.setItem("simtele_sesion_activa", usuarioInput);
+            verificarSesion();
+        } else {
+            mensaje.textContent = "Error: Usuario o contraseña incorrectos.";
+            mensaje.style.color = "red";
+        }
+    }
+});
+
+document.getElementById("cerrarSesion").addEventListener("click", function() {
+    localStorage.removeItem("simtele_sesion_activa");
+    verificarSesion();
+    document.getElementById("formLogin").reset();
+});
+
+function verificarSesion() {
+    let sesionActiva = localStorage.getItem("simtele_sesion_activa");
+    let seccionLogin = document.getElementById("seccionLogin");
+    let appPrincipal = document.getElementById("appPrincipal");
+
+    if (sesionActiva) {
+        seccionLogin.hidden = true;
+        appPrincipal.hidden = false;
+    } else {
+        seccionLogin.hidden = false;
+        appPrincipal.hidden = true;
+    }
+}
+
+// Ejecutar verificación al cargar la página
+window.addEventListener("DOMContentLoaded", function() {
+    verificarSesion();
+});
 
 
 // ==========================================
@@ -406,4 +507,3 @@ document.getElementById("formSensor").addEventListener("submit", function(event)
     document.getElementById("formSensor").reset();
 
 });
-

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,313 +10,347 @@
 
 <body>
 
-    <header class="encabezado">
-        <div class="logo">
-            <span class="logo-icono">🚡</span>
-            <div>
-                <h1>SIMTELE-WEB</h1>
-                <p>Panel educativo de monitoreo y prevención</p>
-            </div>
+    <!-- INICIO DE SESIÓN / REGISTRO -->
+    <section id="seccionLogin" class="login">
+        <div class="login-contenedor">
+            <h2 id="tituloLogin">🚡 SIMTELE-WEB</h2>
+            <p id="subtituloLogin">Iniciar sesión en el sistema</p>
+
+            <form id="formLogin">
+                <div class="campo">
+                    <label>Usuario</label>
+                    <input type="text" id="usuario" placeholder="Ingresa tu usuario" required>
+                </div>
+
+                <div class="campo">
+                    <label>Contraseña</label>
+                    <input type="password" id="contrasena" placeholder="Ingresa tu contraseña" required>
+                </div>
+
+                <button type="submit" id="btnAccionLogin">Iniciar sesión</button>
+                <p id="mensajeLogin"></p>
+            </form>
+
+            <p class="enlace-cambio-modo">
+                <span id="textoCambioModo">¿No tienes cuenta?</span> 
+                <a href="#" id="cambiarModoRegistro">Regístrate aquí</a>
+            </p>
         </div>
+    </section>
 
-        <div class="estado">
-            <span class="punto"></span>
-            SISTEMA DE SIMULACIÓN ACTIVO
-        </div>
-    </header>
-
-    <nav class="menu">
-        <a href="#inicio">Inicio</a>
-        <a href="#emergencia">Emergencia</a>
-        <a href="#mantenimiento">Mantenimiento</a>
-        <a href="#viento">Viento</a>
-        <a href="#sensores">Sensores</a>
-    </nav>
-
-    <main>
-
-        <section id="inicio" class="bienvenida">
-            <div>
-                <span class="etiqueta">CENTRO DE MONITOREO EDUCATIVO</span>
-                <h2>Prevención y monitoreo del transporte por cable</h2>
-                <p>
-                    Plataforma interactiva para registrar, analizar y
-                    simular situaciones hipotéticas de operación.
-                </p>
-            </div>
-
-            <div class="imagen-principal">🚠</div>
-        </section>
-
-        <section class="aviso">
-            <strong>⚠ Aviso importante:</strong>
-            Todos los datos, cálculos y umbrales de esta página son
-            simulaciones educativas. No representan límites operativos reales.
-        </section>
-
-        <section class="resumen">
-            <div class="tarjeta-resumen">
-                <span>🛠️</span>
-                <h3 id="totalMantenimiento">0</h3>
-                <p>Registros de mantenimiento</p>
-            </div>
-
-            <div class="tarjeta-resumen">
-                <span>📡</span>
-                <h3 id="totalSensores">0</h3>
-                <p>Sensores registrados</p>
-            </div>
-
-            <div class="tarjeta-resumen">
-                <span>🌬️</span>
-                <h3 id="estadoViento">Pendiente</h3>
-                <p>Último análisis de viento</p>
-            </div>
-        </section>
-
-        <!-- MODULO 1 -->
-
-        <section id="emergencia" class="modulo">
-            <div class="titulo-modulo">
-                <span class="numero">01</span>
+    <!-- APLICACIÓN PRINCIPAL (OCULTA HASTA INICIAR SESIÓN) -->
+    <div id="appPrincipal" hidden>
+        <header class="encabezado">
+            <div class="logo">
+                <span class="logo-icono">🚡</span>
                 <div>
-                    <h2>Detención de emergencia</h2>
-                    <p>Estimación de distancia durante el tiempo de reacción.</p>
+                    <h1>SIMTELE-WEB</h1>
+                    <p>Panel educativo de monitoreo y prevención</p>
                 </div>
             </div>
 
-            <div class="contenido-modulo">
-                <form id="formEmergencia">
+            <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                <div class="estado">
+                    <span class="punto"></span>
+                    SISTEMA DE SIMULACIÓN ACTIVO
+                </div>
+                <button id="cerrarSesion">Cerrar sesión</button>
+            </div>
+        </header>
 
-                    <div class="campo">
-                        <label for="velocidad">Velocidad (km/h)</label>
-                        <input type="number" id="velocidad"
-                            placeholder="Ejemplo: 72" step="any" min="0" required>
-                    </div>
+        <nav class="menu">
+            <a href="#inicio">Inicio</a>
+            <a href="#emergencia">Emergencia</a>
+            <a href="#mantenimiento">Mantenimiento</a>
+            <a href="#viento">Viento</a>
+            <a href="#sensores">Sensores</a>
+        </nav>
 
-                    <div class="campo">
-                        <label for="reaccion">Tiempo de reacción (segundos)</label>
-                        <input type="number" id="reaccion"
-                            placeholder="Ejemplo: 3" step="any" min="0" required>
-                    </div>
+        <main>
 
-                    <p class="ayuda">
-                        Fórmula: distancia = (velocidad / 3.6) × tiempo.
+            <section id="inicio" class="bienvenida">
+                <div>
+                    <span class="etiqueta">CENTRO DE MONITOREO EDUCATIVO</span>
+                    <h2>Prevención y monitoreo del transporte por cable</h2>
+                    <p>
+                        Plataforma interactiva para registrar, analizar y
+                        simular situaciones hipotéticas de operación.
                     </p>
-
-                    <button type="submit">Calcular distancia</button>
-                </form>
-
-                <div id="resultadoEmergencia" class="resultado">
-                    <span>📊</span>
-                    <p>Los resultados aparecerán aquí.</p>
                 </div>
 
-                <p class="nota">
-                    Umbral didáctico: 20 metros. No es un límite real de seguridad.
-                </p>
-            </div>
-        </section>
+                <div class="imagen-principal">🚠</div>
+            </section>
 
-        <!-- MODULO 2 -->
+            <section class="aviso">
+                <strong>⚠ Aviso importante:</strong>
+                Todos los datos, cálculos y umbrales de esta página son
+                simulaciones educativas. No representan límites operativos reales.
+            </section>
 
-        <section id="mantenimiento" class="modulo">
-            <div class="titulo-modulo">
-                <span class="numero">02</span>
-                <div>
-                    <h2>Registro de mantenimiento</h2>
-                    <p>Administración de componentes y su estado.</p>
-                </div>
-            </div>
-
-            <div class="contenido-modulo">
-                <form id="formMantenimiento">
-
-                    <div class="campo">
-                        <label for="componente">Nombre del componente</label>
-                        <input type="text" id="componente"
-                            placeholder="Ejemplo: Motor" required>
-                    </div>
-
-                    <div class="campo">
-                        <label for="horas">Horas de uso</label>
-                        <input type="number" id="horas"
-                            placeholder="Ejemplo: 120" min="0" step="any" required>
-                    </div>
-
-                    <div class="campo">
-                        <label for="estado">Estado del componente</label>
-                        <select id="estado" required>
-                            <option value="">Seleccionar estado</option>
-                            <option value="Normal">Normal</option>
-                            <option value="Revisión">Revisión</option>
-                            <option value="Urgente">Urgente</option>
-                        </select>
-                    </div>
-
-                    <button type="submit">Agregar registro</button>
-                </form>
-
-                <div class="tabla-contenedor">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Componente</th>
-                                <th>Horas</th>
-                                <th>Estado</th>
-                                <th>Acción</th>
-                            </tr>
-                        </thead>
-
-                        <tbody id="tablaMantenimiento">
-                            <tr>
-                                <td colspan="4">No hay registros todavía.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- MODULO 3 -->
-
-        <section id="viento" class="modulo">
-            <div class="titulo-modulo">
-                <span class="numero">03</span>
-                <div>
-                    <h2>Viento y oscilación</h2>
-                    <p>Análisis de cinco mediciones simuladas.</p>
-                </div>
-            </div>
-
-            <div class="contenido-modulo">
-                <form id="formViento">
-
-                    <div class="grupo-viento">
-                        <div class="campo">
-                            <label for="viento1">Medición 1</label>
-                            <input type="number" id="viento1"
-                                placeholder="0" min="0" step="any" required>
-                        </div>
-
-                        <div class="campo">
-                            <label for="viento2">Medición 2</label>
-                            <input type="number" id="viento2"
-                                placeholder="0" min="0" step="any" required>
-                        </div>
-
-                        <div class="campo">
-                            <label for="viento3">Medición 3</label>
-                            <input type="number" id="viento3"
-                                placeholder="0" min="0" step="any" required>
-                        </div>
-
-                        <div class="campo">
-                            <label for="viento4">Medición 4</label>
-                            <input type="number" id="viento4"
-                                placeholder="0" min="0" step="any" required>
-                        </div>
-
-                        <div class="campo">
-                            <label for="viento5">Medición 5</label>
-                            <input type="number" id="viento5"
-                                placeholder="0" min="0" step="any" required>
-                        </div>
-                    </div>
-
-                    <p class="ayuda">
-                        Ingresa cinco valores simulados de intensidad del viento (km/h).
-                    </p>
-
-                    <button type="submit">Analizar mediciones</button>
-                </form>
-
-                <div id="resultadoViento" class="resultado">
-                    <span>🌬️</span>
-                    <p>Esperando las cinco mediciones.</p>
+            <section class="resumen">
+                <div class="tarjeta-resumen">
+                    <span>🛠️</span>
+                    <h3 id="totalMantenimiento">0</h3>
+                    <p>Registros de mantenimiento</p>
                 </div>
 
-                <p class="nota">
-                    Clasificación didáctica: menor de 20 = baja;
-                    de 20 a 40 = moderada; mayor de 40 = alta.
-                </p>
-            </div>
-        </section>
-
-        <!-- MODULO 4 -->
-
-        <section id="sensores" class="modulo">
-            <div class="titulo-modulo">
-                <span class="numero">04</span>
-                <div>
-                    <h2>Registro de sensores</h2>
-                    <p>Validación de códigos y lecturas.</p>
-                </div>
-            </div>
-
-            <div class="contenido-modulo">
-                <form id="formSensor">
-
-                    <div class="campo">
-                        <label for="codigoSensor">Código del sensor</label>
-                        <input type="text" id="codigoSensor"
-                            placeholder="Ejemplo: SEN-001" required>
-                        <small>Formato obligatorio: SEN- seguido de tres números.</small>
-                    </div>
-
-                    <div class="campo">
-                        <label for="tipoSensor">Tipo de sensor</label>
-                        <select id="tipoSensor" required>
-                            <option value="">Seleccionar tipo</option>
-                            <option value="Velocidad">Velocidad</option>
-                            <option value="Temperatura">Temperatura</option>
-                            <option value="Vibración">Vibración</option>
-                            <option value="Viento">Viento</option>
-                        </select>
-                    </div>
-
-                    <div class="campo">
-                        <label for="lecturaSensor">Lectura del sensor</label>
-                        <input type="text" id="lecturaSensor"
-                            placeholder="Ejemplo: 25.5" required>
-                    </div>
-
-                    <button type="submit">Registrar sensor</button>
-                </form>
-
-                <div id="resultadoSensor" class="resultado">
+                <div class="tarjeta-resumen">
                     <span>📡</span>
-                    <p>Los mensajes de validación aparecerán aquí.</p>
+                    <h3 id="totalSensores">0</h3>
+                    <p>Sensores registrados</p>
                 </div>
 
-                <div class="tabla-contenedor">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Código</th>
-                                <th>Tipo</th>
-                                <th>Lectura</th>
-                            </tr>
-                        </thead>
-
-                        <tbody id="tablaSensores">
-                            <tr>
-                                <td colspan="3">No hay sensores registrados.</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="tarjeta-resumen">
+                    <span>🌬️</span>
+                    <h3 id="estadoViento">Pendiente</h3>
+                    <p>Último análisis de viento</p>
                 </div>
-            </div>
-        </section>
+            </section>
 
-    </main>
+            <!-- MODULO 1 -->
 
-    <footer>
-        <h3>🚡 SIMTELE-WEB</h3>
-        <p>Proyecto académico | Programación Web I</p>
-        <p>Simulación educativa de prevención y monitoreo.</p>
-        <p>© 2026 - Proyecto desarrollado por estudiantes.</p>
-    </footer>
+            <section id="emergencia" class="modulo">
+                <div class="titulo-modulo">
+                    <span class="numero">01</span>
+                    <div>
+                        <h2>Detención de emergencia</h2>
+                        <p>Estimación de distancia durante el tiempo de reacción.</p>
+                    </div>
+                </div>
+
+                <div class="contenido-modulo">
+                    <form id="formEmergencia">
+
+                        <div class="campo">
+                            <label for="velocidad">Velocidad (km/h)</label>
+                            <input type="number" id="velocidad"
+                                placeholder="Ejemplo: 72" step="any" min="0" required>
+                        </div>
+
+                        <div class="campo">
+                            <label for="reaccion">Tiempo de reacción (segundos)</label>
+                            <input type="number" id="reaccion"
+                                placeholder="Ejemplo: 3" step="any" min="0" required>
+                        </div>
+
+                        <p class="ayuda">
+                            Fórmula: distancia = (velocidad / 3.6) × tiempo.
+                        </p>
+
+                        <button type="submit">Calcular distancia</button>
+                    </form>
+
+                    <div id="resultadoEmergencia" class="resultado">
+                        <span>📊</span>
+                        <p>Los resultados aparecerán aquí.</p>
+                    </div>
+
+                    <p class="nota">
+                        Umbral didáctico: 20 metros. No es un límite real de seguridad.
+                    </p>
+                </div>
+            </section>
+
+            <!-- MODULO 2 -->
+
+            <section id="mantenimiento" class="modulo">
+                <div class="titulo-modulo">
+                    <span class="numero">02</span>
+                    <div>
+                        <h2>Registro de mantenimiento</h2>
+                        <p>Administración de componentes y su estado.</p>
+                    </div>
+                </div>
+
+                <div class="contenido-modulo">
+                    <form id="formMantenimiento">
+
+                        <div class="campo">
+                            <label for="componente">Nombre del componente</label>
+                            <input type="text" id="componente"
+                                placeholder="Ejemplo: Motor" required>
+                        </div>
+
+                        <div class="campo">
+                            <label for="horas">Horas de uso</label>
+                            <input type="number" id="horas"
+                                placeholder="Ejemplo: 120" min="0" step="any" required>
+                        </div>
+
+                        <div class="campo">
+                            <label for="estado">Estado del componente</label>
+                            <select id="estado" required>
+                                <option value="">Seleccionar estado</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Revisión">Revisión</option>
+                                <option value="Urgente">Urgente</option>
+                            </select>
+                        </div>
+
+                        <button type="submit">Agregar registro</button>
+                    </form>
+
+                    <div class="tabla-contenedor">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Componente</th>
+                                    <th>Horas</th>
+                                    <th>Estado</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tablaMantenimiento">
+                                <tr>
+                                    <td colspan="4">No hay registros todavía.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MODULO 3 -->
+
+            <section id="viento" class="modulo">
+                <div class="titulo-modulo">
+                    <span class="numero">03</span>
+                    <div>
+                        <h2>Viento y oscilación</h2>
+                        <p>Análisis de cinco mediciones simuladas.</p>
+                    </div>
+                </div>
+
+                <div class="contenido-modulo">
+                    <form id="formViento">
+
+                        <div class="grupo-viento">
+                            <div class="campo">
+                                <label for="viento1">Medición 1</label>
+                                <input type="number" id="viento1"
+                                    placeholder="0" min="0" step="any" required>
+                            </div>
+
+                            <div class="campo">
+                                <label for="viento2">Medición 2</label>
+                                <input type="number" id="viento2"
+                                    placeholder="0" min="0" step="any" required>
+                            </div>
+
+                            <div class="campo">
+                                <label for="viento3">Medición 3</label>
+                                <input type="number" id="viento3"
+                                    placeholder="0" min="0" step="any" required>
+                            </div>
+
+                            <div class="campo">
+                                <label for="viento4">Medición 4</label>
+                                <input type="number" id="viento4"
+                                    placeholder="0" min="0" step="any" required>
+                            </div>
+
+                            <div class="campo">
+                                <label for="viento5">Medición 5</label>
+                                <input type="number" id="viento5"
+                                    placeholder="0" min="0" step="any" required>
+                            </div>
+                        </div>
+
+                        <p class="ayuda">
+                            Ingresa cinco valores simulados de intensidad del viento (km/h).
+                        </p>
+
+                        <button type="submit">Analizar mediciones</button>
+                    </form>
+
+                    <div id="resultadoViento" class="resultado">
+                        <span>🌬️</span>
+                        <p>Esperando las cinco mediciones.</p>
+                    </div>
+
+                    <p class="nota">
+                        Clasificación didáctica: menor de 20 = baja;
+                        de 20 a 40 = moderada; mayor de 40 = alta.
+                    </p>
+                </div>
+            </section>
+
+            <!-- MODULO 4 -->
+
+            <section id="sensores" class="modulo">
+                <div class="titulo-modulo">
+                    <span class="numero">04</span>
+                    <div>
+                        <h2>Registro de sensores</h2>
+                        <p>Validación de códigos y lecturas.</p>
+                    </div>
+                </div>
+
+                <div class="contenido-modulo">
+                    <form id="formSensor">
+
+                        <div class="campo">
+                            <label for="codigoSensor">Código del sensor</label>
+                            <input type="text" id="codigoSensor"
+                                placeholder="Ejemplo: SEN-001" required>
+                            <small>Formato obligatorio: SEN- seguido de tres números.</small>
+                        </div>
+
+                        <div class="campo">
+                            <label for="tipoSensor">Tipo de sensor</label>
+                            <select id="tipoSensor" required>
+                                <option value="">Seleccionar tipo</option>
+                                <option value="Velocidad">Velocidad</option>
+                                <option value="Temperatura">Temperatura</option>
+                                <option value="Vibración">Vibración</option>
+                                <option value="Viento">Viento</option>
+                            </select>
+                        </div>
+
+                        <div class="campo">
+                            <label for="lecturaSensor">Lectura del sensor</label>
+                            <input type="text" id="lecturaSensor"
+                                placeholder="Ejemplo: 25.5" required>
+                        </div>
+
+                        <button type="submit">Registrar sensor</button>
+                    </form>
+
+                    <div id="resultadoSensor" class="resultado">
+                        <span>📡</span>
+                        <p>Los mensajes de validación aparecerán aquí.</p>
+                    </div>
+
+                    <div class="tabla-contenedor">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Tipo</th>
+                                    <th>Lectura</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tablaSensores">
+                                <tr>
+                                    <td colspan="3">No hay sensores registrados.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer>
+            <h3>🚡 SIMTELE-WEB</h3>
+            <p>Proyecto académico | Programación Web I</p>
+            <p>Simulación educativa de prevención y monitoreo.</p>
+            <p>© 2026 - Proyecto desarrollado por estudiantes.</p>
+        </footer>
+    </div>
 
 </body>
 </html>

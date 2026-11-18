@@ -1,7 +1,6 @@
-
 /* CONFIGURACION GENERAL */
 
-* {
+- {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -493,4 +492,98 @@ footer p {
     .resumen {
         flex-direction: column;
     }
+}
+
+/* ==================================
+   INICIO DE SESION Y REGISTRO
+================================== */
+
+[hidden] {
+    display: none !important;
+}
+
+.login {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #eef2f7;
+}
+
+.login-contenedor {
+    background: white;
+    padding: 35px;
+    width: 380px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.login-contenedor h2 {
+    color: #173b63;
+    margin-bottom: 10px;
+}
+
+.login-contenedor p {
+    color: #666;
+    font-size: 13px;
+}
+
+.login-contenedor .campo {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.login-contenedor input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    margin-top: 7px;
+    box-sizing: border-box;
+}
+
+.login-contenedor button {
+    width: 100%;
+    padding: 12px;
+    background: #087e8b;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.login-contenedor button:hover {
+    background: #065d69;
+}
+
+.enlace-cambio-modo {
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+.enlace-cambio-modo a {
+    color: #087e8b;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.enlace-cambio-modo a:hover {
+    text-decoration: underline;
+}
+
+#cerrarSesion {
+    background: #dc4545;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#cerrarSesion:hover {
+    background: #a92525;
 }
